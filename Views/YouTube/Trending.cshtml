@@ -1,0 +1,33 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+@model List<YouTubeApiProject.Models.YouTubeVideoModel>
+
+<div class="search-header">
+    <h2>Trending Videos in Malaysia</h2>
+</div>
+<div class="video-list trending">
+    @if (Model != null && Model.Any())
+    {
+        int rank = 1;
+        foreach (var video in Model)
+        {
+            <a href="@video.VideoUrl" target="_blank" class="video-item-link">
+                <div class="video-item">
+                    <span class="video-rank">#@rank</span>
+                    <img src="@video.ThumbnailUrl" alt="@video.Title" class="video-thumbnail" />
+                    <div class="video-details">
+                        <h3>@video.Title</h3>
+                        <p>@video.Description</p>
+                    </div>
+                </div>
+            </a>
+            rank++;
+        }
+    }
+    else
+    {
+        <p>No trending videos found.</p>
+    }
+</div>

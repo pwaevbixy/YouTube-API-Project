@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - YouTubeApiProject</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/YouTubeApiProject1.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <span class="navbar-brand">YouTubeApiProject</span> <!-- Changed to span -->
+                <div class="navbar-collapse">
+                    <ul class="navbar-nav">
+                        <!-- Home Menu -->
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <!-- Search Music Menu -->
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="YouTube" asp-action="Index">Search Videos</a>
+                        </li>
+                        <!-- Search Trending Menu -->
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="YouTube" asp-action="Trending">Search Trending</a>
+                        </li>
+                        <!-- Search Channel Menu -->
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="YouTube" asp-action="Channel">Search Channel</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody() <!-- Ensure this line is present -->
+        </main>
+    </div>
+
+    <footer class="footer text-muted">
+        <div class="container">
+            © 2024 - YouTubeApiProject - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

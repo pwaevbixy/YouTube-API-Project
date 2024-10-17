@@ -1,0 +1,97 @@
+﻿using Google.Apis.Services;
+using Google.Apis.YouTube.v3;
+using YouTubeApiProject.Models;
+using Microsoft.Extensions.Configuration;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace YouTubeApiProject.Services
+{
+    public class YouTubeApiService
+    {
+        private readonly string _apiKey;
+
+        public YouTubeApiService(IConfiguration configuration)
+        {
+            _apiKey = configuration["YouTubeApiKey"];
+        }
+
+        public async Task<List<YouTubeVideoModel>> SearchVideosAsync(string query)
+        {
+            var youtubeService = new YouTubeService(new BaseClientService.Initializer()
+            {
+                ApiKey = _apiKey,
+                ApplicationName = "YouTubeApiProject"
+            });
+
+            var searchRequest = youtubeService.Search.List("snippet");
+            searchRequest.Q = query;
+            searchRequest.MaxResults = 10;
+
+            var searchResponse = await searchRequest.ExecuteAsync();
+
+            var videos = searchResponse.Items.Select(item => new YouTubeVideoModel
+            {
+                Title = item.Snippet.Title,
+                Description = item.Snippet.Description,
+                ThumbnailUrl = item.Snippet.Thumbnails.Medium.Url,
+                VideoUrl = "https://www.youtube.com/watch?v=" + item.Id.VideoId
+            }).ToList();
+
+            return videos;
+        }
+
+        public async Task<List<YouTubeVideoModel>> GetTrendingVideosAsync()
+        {
+            var youtubeService = new YouTubeService(new BaseClientService.Initializer()
+            {
+                ApiKey = _apiKey,
+                ApplicationName = "YouTubeApiProject"
+            });
+
+            var searchRequest = youtubeService.Videos.List("snippet");
+            searchRequest.Chart = VideosResource.ListRequest.ChartEnum.MostPopular;
+            searchRequest.RegionCode = "MY"; // Malaysia
+            searchRequest.MaxResults = 20;
+
+            var searchResponse = await searchRequest.ExecuteAsync();
+
+            var videos = searchResponse.Items.Select(item => new YouTubeVideoModel
+            {
+                Title = item.Snippet.Title,
+                Description = item.Snippet.Description,
+                ThumbnailUrl = item.Snippet.Thumbnails.Medium.Url,
+                VideoUrl = "https://www.youtube.com/watch?v=" + item.Id
+            }).ToList();
+
+            return videos;
+        }
+
+        public async Task<List<YouTubeVideoModel>> SearchChannelVideosAsync(string query)
+        {
+            var youtubeService = new YouTubeService(new BaseClientService.Initializer()
+            {
+                ApiKey = _apiKey,
+                ApplicationName = "YouTubeApiProject"
+            });
+
+            var searchRequest = youtubeService.Search.List("snippet");
+            searchRequest.Q = query;
+            searchRequest.Type = "channel";
+            searchRequest.MaxResults = 10;
+
+            var searchResponse = await searchRequest.ExecuteAsync();
+
+            var channels = searchResponse.Items.Select(item => new YouTubeVideoModel
+            {
+                Title = item.Snippet.Title,
+                Description = item.Snippet.Description,
+                ThumbnailUrl = item.Snippet.Thumbnails.Medium.Url,
+                VideoUrl = "https://www.youtube.com/channel/" + item.Id.ChannelId
+            }).ToList();
+
+            return channels;
+        }
+    }
+}

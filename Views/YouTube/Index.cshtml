@@ -1,0 +1,36 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+@model List<YouTubeApiProject.Models.YouTubeVideoModel>
+
+<div class="search-header">
+    <h2>Search YouTube Videos</h2>
+</div>
+<div class="search-form">
+    <form asp-action="Index" method="post">
+        <input type="text" name="query" placeholder="Search for videos..." />
+        <button type="submit">Search</button>
+    </form>
+</div>
+<div class="video-list">
+    @if (Model != null && Model.Any())
+    {
+        foreach (var video in Model)
+        {
+            <a href="@video.VideoUrl" target="_blank" class="video-item-link">
+                <div class="video-item">
+                    <img src="@video.ThumbnailUrl" alt="@video.Title" class="video-thumbnail" />
+                    <div class="video-details">
+                        <h3>@video.Title</h3>
+                        <p>@video.Description</p>
+                    </div>
+                </div>
+            </a>
+        }
+    }
+    else
+    {
+        <p>No videos found.</p>
+    }
+</div>

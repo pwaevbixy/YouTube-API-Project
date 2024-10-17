@@ -1,0 +1,278 @@
+/* General styles */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f5;
+    background-image: url('/images/tr.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    width: 95%;
+    margin: auto;
+    overflow: auto; /* Allow scrolling */
+    flex: 1; /* Allow the container to grow and fill the available space */
+}
+
+/* Navbar styles */
+.navbar {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: #26566c;
+    font-size: 20px;
+    font: arial;
+    padding: 10px 30px;
+    text-align: center;
+    display: flex;
+    justify-content: flex-start; /* Align items to the left */
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.navbar-brand {
+    color: #fff;
+    font-size: 24px;
+    margin-right: 20px;
+}
+
+.navbar a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    display: inline-block;
+}
+
+    .navbar a:hover {
+        background-color: #609ab6;
+    }
+
+.navbar-collapse {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.navbar-nav {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-item {
+    margin: 0 10px;
+}
+
+/* Homepage styles */
+.home-content {
+    padding: 20px;
+    text-align: center;
+    background-color: #fff; /* Set background to white */
+    color: #333;
+    border-radius: 10px;
+    margin-top: 100px; /* Add margin to the top to push content down */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+    .home-content h2 {
+        font-size: 2.5em;
+        margin-bottom: 10px;
+        color: #26566c; /* Add a color to the headings */
+    }
+
+    .home-content p {
+        font-size: 1.2em;
+        margin-bottom: 20px;
+        line-height: 1.6; /* Improve readability */
+    }
+
+/* Search Music page styles */
+.search-header {
+    background: #fff;
+    color: #609ab6;
+    padding: 10px 0;
+    text-align: center;
+}
+
+    .search-header h2 {
+        margin: 0;
+        font-size: 3.6em;
+    }
+
+.search-form {
+    padding: 15px;
+    text-align: center;
+}
+
+    .search-form input[type="text"] {
+        padding: 15px;
+        width: 600px;
+        font-size: 1em;
+        border-radius: 10px;
+    }
+
+    .search-form button {
+        padding: 15px 20px;
+        font-size: 1em;
+        background-color: #609ab6;
+        color: #fff;
+        border: 100px;
+        cursor: pointer;
+    }
+
+        .search-form button:hover {
+            background-color: #758388;
+        }
+
+/* Video list styles */
+.video-list {
+    padding: 50px;
+    text-align: center;
+}
+
+    /* Trending video list styles */
+    .video-list.trending {
+        text-align: left; /* Align text to the left */
+    }
+
+.video-item-link {
+    text-decoration: none; /* Remove underline from links */
+    color: inherit; /* Inherit text color */
+}
+
+.video-item {
+    display: flex;
+    align-items: flex-start; /* Align items to the top */
+    margin-bottom: 20px;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background-color: #fff;
+    transition: background-color 0.3s ease;
+    height: 200px; /* Set a fixed height for all video items */
+}
+
+.video-rank {
+    font-size: 2em; /* Make the ranking number larger */
+    font-weight: bold;
+    margin-right: 20px;
+    color: #609ab6;
+}
+
+.video-thumbnail {
+    max-width: 100%; /* Ensure the thumbnail does not exceed the width of its container */
+    max-height: 100%; /* Ensure the thumbnail does not exceed the height of its container */
+    width: 360px; /* Set a fixed width for the thumbnail */
+    height: auto;
+    margin-right: 20px;
+    border-radius: 10px;
+}
+
+.video-details {
+    flex: 1;
+}
+
+    .video-details h3 {
+        font-size: 1.5em; /* Make the title larger */
+        color: #333;
+        margin: 0 0 10px 0;
+        text-decoration: underline; /* Add underline to the title */
+    }
+
+    .video-details p {
+        font-size: 1em; /* Adjust the font size for the description */
+        color: #666;
+        margin: 10px 0 0 0; /* Add space below the title */
+        text-decoration: none; /* Remove underline from the description */
+        white-space: pre-wrap; /* Allow multiple lines for the description */
+        overflow: hidden; /* Hide overflow text */
+        text-overflow: ellipsis; /* Add ellipsis for overflow text */
+        display: -webkit-box;
+        -webkit-line-clamp: 3; /* Limit to 3 lines */
+        -webkit-box-orient: vertical;
+    }
+
+.video-item:hover {
+    background-color: #f0f0f0;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Channel video list styles */
+.video-list.channel .row {
+    display: grid; /* Use grid layout */
+    grid-template-columns: repeat(3, 1fr); /* Create 3 equal columns */
+    grid-gap: 20px; /* Add space between the grid items */
+    margin-bottom: 20px;
+}
+
+.video-list.channel .video-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    margin: 10px;
+    padding: 20px;
+    height: 350px; /* Keep a fixed height for uniformity */
+    width: 100%;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.video-list.channel .video-thumbnail {
+    width: 100%;
+    height: 220px; /* Set height for thumbnails */
+    object-fit: cover; /* Ensure the image covers the container without distortion */
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+.video-list.channel .video-details h3 {
+    font-size: 1.2em;
+    color: #333;
+    margin: 0 0 10px 0;
+}
+
+.video-list.channel .video-details p {
+    font-size: 1em;
+    color: #666;
+    margin: 10px 0 0 0;
+}
+
+
+/* Footer styles */
+.footer {
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Ensure scrollbar sticks to the side wall */
+body::-webkit-scrollbar {
+    width: 12px;
+}
+
+body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+    body::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }

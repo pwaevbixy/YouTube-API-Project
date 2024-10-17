@@ -1,0 +1,50 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+@model List<YouTubeApiProject.Models.YouTubeVideoModel>
+
+<div class="search-header">
+    <h2>Search YouTube Channels</h2>
+</div>
+<div class="search-form">
+    <form asp-action="Channel" method="post">
+        <input type="text" name="query" placeholder="Search for channels..." />
+        <button type="submit">Search</button>
+    </form>
+</div>
+<div class="video-list channel">
+    @if (Model != null && Model.Any())
+    {
+        int count = 0;
+        foreach (var channel in Model)
+        {
+            if (count % 3 == 0)
+            {
+                @:<div class="row">
+            }
+            <a href="@channel.VideoUrl" target="_blank" class="video-item-link">
+                <div class="col-md-4 video-item">
+                    <img src="@channel.ThumbnailUrl" alt="@channel.Title" class="video-thumbnail" />
+                    <div class="video-details">
+                        <h3>@channel.Title</h3>
+                        <p>@channel.Description</p>
+                    </div>
+                </div>
+            </a>
+            count++;
+            if (count % 3 == 0)
+            {
+                @:</div>
+            }
+        }
+        if (count % 3 != 0)
+        {
+            @:</div>
+        }
+    }
+    else
+    {
+        <p>No channels found.</p>
+    }
+</div>
